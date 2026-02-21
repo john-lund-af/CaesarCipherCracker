@@ -1,7 +1,7 @@
 
 def decrypt(cc_message: str, key: int, symbols: str) -> str:
     """
-    Decrypts a Caesar Cipher message
+    Decrypts a Caesar Cipher message by changing each letter position by subtracting with given key
     :param cc_message: A string containing the Caesar cipher message
     :param key: Key that was used to encrypt the message
     :param symbols: A string containing the symbols to use to decipher the message (e.g. english alphabet)
@@ -25,3 +25,20 @@ def decrypt(cc_message: str, key: int, symbols: str) -> str:
         decrypted_chs.append(ch)
 
     return "".join(decrypted_chs)
+
+
+def decryption_candidates(text: str, symbols: str) -> list[tuple]:
+    """
+    Returns all possible combinations of the given text
+    :param text: The encrypted text
+    :param symbols: The symbols used for encrypting the text
+    :return: A list of tuples where each tuple contains a key and a text candidate.
+    """
+    candidates = []
+
+    for key in range(len(symbols)):
+        candidate = decrypt(text, key, symbols)
+        if candidate != text:
+            candidates.append((key, candidate))
+
+    return candidates
