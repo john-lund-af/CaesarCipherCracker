@@ -9,10 +9,12 @@ def decrypt(cc_message: str, key: int, symbols: str) -> str:
     """
 
     decrypted_chs: list[str] = [] # List for decrypted characters
+    cc_message = cc_message.casefold()
+    symbols = symbols.casefold()
 
     for ch in cc_message:
         # Just adds the character to the decrypted_chs list if the character is not part of the swedish alphabet
-        if ch.casefold() not in symbols:
+        if ch.casefold() not in symbols.casefold():
             decrypted_chs.append(ch)
             continue
 
