@@ -29,19 +29,19 @@ def decrypt(cc_message: str, key: int, symbols: str) -> str:
     return "".join(decrypted_chs)
 
 
-def decryption_candidates(text: str, symbols: str) -> list[tuple]:
+def decryption_candidates(text: str, symbols: str) -> list[dict]:
     """
     Returns all possible combinations of the given text
     :param text: The encrypted text
     :param symbols: The symbols used for encrypting the text
-    :return: A list of tuples where each tuple contains a key and a text candidate.
+    :return: A list of dictionaries where each dict contains a key and a text candidate.
     """
     candidates = []
 
     for key in range(len(symbols)):
         candidate = decrypt(text, key, symbols)
         if candidate != text:
-            candidates.append((key, candidate))
+            candidates.append({"key" : key, "text": candidate})
 
     return candidates
 
@@ -50,8 +50,8 @@ def evaluate_decryption(text: str, common_words: set):
     """
     Returns the number of encountered words in the common_words set.
     :param text: A string with the text to evaluate
-    :param common_words: A set with common words used to compare the text with.
-    :return: The number of encountered words
+    :param common_words: A set with common words used to evaluate the text.
+    :return: The number of encountered words in the common_words set
     """
     word_set = set(text.split())
     new_set = common_words.intersection(word_set)
