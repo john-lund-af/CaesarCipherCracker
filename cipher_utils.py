@@ -13,7 +13,7 @@ def decrypt(cc_message: str, key: int, symbols: str) -> str:
     symbols = symbols.casefold()
 
     for ch in cc_message:
-        # Just adds the character to the decrypted_chs list if the character is not part of the swedish alphabet
+        # Just adds the character to the decrypted_chs list if the character is not included in symbols str.
         if ch.casefold() not in symbols.casefold():
             decrypted_chs.append(ch)
             continue
@@ -44,3 +44,15 @@ def decryption_candidates(text: str, symbols: str) -> list[tuple]:
             candidates.append((key, candidate))
 
     return candidates
+
+
+def evaluate_decryption(text: str, common_words: set):
+    """
+    Returns the number of encountered words in the common_words set.
+    :param text: A string with the text to evaluate
+    :param common_words: A set with common words used to compare the text with.
+    :return: The number of encountered words
+    """
+    word_set = set(text.split())
+    new_set = common_words.intersection(word_set)
+    return len(new_set)
