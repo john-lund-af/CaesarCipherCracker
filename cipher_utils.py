@@ -46,12 +46,12 @@ def decryption_candidates(text: str, symbols: str) -> list[dict]:
     return candidates
 
 
-def evaluate_decryption(text: str, common_words: set):
+def evaluate_decryption(text: str, common_words: set) -> int:
     """
     Returns the number of encountered words in the common_words set.
     :param text: A string with the text to evaluate
     :param common_words: A set with common words used to evaluate the text.
-    :return: The number of encountered words in the common_words set
+    :return: An integer with the number of encountered words in the common_words set
     """
     word_set = set(text.split())
     new_set = common_words.intersection(word_set)
